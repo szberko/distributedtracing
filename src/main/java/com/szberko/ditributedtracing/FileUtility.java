@@ -13,19 +13,21 @@ public class FileUtility {
 
     public static Graph parseGraph(Stream<String> connections){
         final List<String> edges = separateEdges(connections);
-        return new Graph(parseNodes(edges), parseEdges(edges));
+
+        final Map<String, Node> nodes = parseNodes(edges);
+        final Map<String, Edge> finalEdges = parseEdges(edges, nodes);
+
+        return new Graph(nodes, finalEdges);
     }
 
-    private static Map<String, Edge> parseEdges(List<String> connections){
-        return connections.stream().map(FileUtility::createEdge).collect(Collectors.toMap(Edge::getName, edge -> edge));
-    }
-
-    private static Edge createEdge(String connection) {
-        return new Edge("" + connection.charAt(0) + connection.charAt(1),
-                Integer.parseInt("" + connection.charAt(2)),
-                new Node("" + connection.charAt(0)),
-                new Node("" + connection.charAt(1))
-        );
+    private static Map<String, Edge> parseEdges(List<String> connections, Map<String, Node> nodes){
+        return connections.stream()
+                .map(connection -> new Edge(
+                        "" + connection.charAt(0) + connection.charAt(1),
+                        Integer.parseInt("" + connection.charAt(2)),
+                        nodes.get("" + connection.charAt(0)),
+                        nodes.get("" + connection.charAt(1))))
+                .collect(Collectors.toMap(Edge::getName, edge -> edge));
     }
 
     private static Map<String, Node> parseNodes(List<String> connections){
@@ -33,7 +35,7 @@ public class FileUtility {
                 .map(connection -> connection.split(""))
                 .flatMap(Arrays::stream)
                 .map(Node::new)
-                .collect(Collectors.toMap(Node::getName, node -> node));
+                .collect(Collectors.toMap(Node::getName, node -> node, (node1, node2) -> node1));
     }
 
     protected static List<String> separateEdges(Stream<String> input){

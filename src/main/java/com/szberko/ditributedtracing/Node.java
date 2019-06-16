@@ -1,18 +1,40 @@
 package com.szberko.ditributedtracing;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 public class Node {
 
     private final String name;
+    private Set<Edge> outgoingEdges;
+    private Set<Edge> incomingEdges;
 
-    public Node(String name) {
+        public Node(String name) {
         this.name = name;
+        this.outgoingEdges = new HashSet<>();
+        this.incomingEdges = new HashSet<>();
     }
 
     public String getName() {
         return name;
+    }
+
+    public void addOutGoingEdge(Edge edge) {
+            this.outgoingEdges.add(edge);
+    }
+
+    public void addInComingEdge(Edge edge) {
+            this.incomingEdges.add(edge);
+    }
+
+    public Set<Edge> getOutgoingEdges() {
+        return outgoingEdges;
+    }
+
+    public Set<Edge> getIncomingEdges() {
+        return incomingEdges;
     }
 
     @Override
