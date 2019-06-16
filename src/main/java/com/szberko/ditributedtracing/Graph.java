@@ -41,8 +41,16 @@ public class Graph {
     public int getLengthOfTheShortestTrace(final String startingNodeName,
                                            final String endingNodeName){
         final Trace trace = new Trace(nodes.get(endingNodeName));
+        trace.findShortestTrace(nodes.get(startingNodeName), nodes.size());
+        return trace.getMinLatency();
+    }
 
-        return 0;
+    public int getNumberOfRoutes(final String startingNodeName,
+                                 final String endingNodeName,
+                                 final Predicate<Integer> latencyPredicate) {
+        final Trace trace = new Trace(nodes.get(endingNodeName));
+        trace.getNumberOfDifferentTracesWithAnAvarageLatency(nodes.get(startingNodeName), latencyPredicate, nodes.size()*2);
+        return trace.getNumberOfRoutes();
     }
 
     @Override

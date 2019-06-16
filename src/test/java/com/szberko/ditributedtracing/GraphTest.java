@@ -69,6 +69,21 @@ class GraphTest {
                 4), equalTo(3));
     }
 
+    @Test
+    void givenGraph_whenAtoCFindMinLatency_thenReturn9(){
+        assertThat(graph.getLengthOfTheShortestTrace("A", "C"), equalTo(9));
+    }
 
+    @Test
+    void givenGraph_whenBtoBFindMinLatency_thenReturn9(){
+        assertThat(graph.getLengthOfTheShortestTrace("B", "B"), equalTo(9));
+    }
 
+    @Test
+    void givenGraph_whenCtoCFindAllDifferentTracesWithin30Latency_thenReturn7Routes(){
+        assertThat(graph.getNumberOfRoutes(
+                "C",
+                "C",
+                latency -> latency < 30), equalTo(7));
+    }
 }
