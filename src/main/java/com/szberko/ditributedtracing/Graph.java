@@ -29,18 +29,31 @@ public class Graph {
         return overallLatency;
     }
 
+//    public int getNumberOfRoutesWithSpecificHopsCriteria(final String startingNodeName,
+//                                                         final String endingNodeName,
+//                                                         final Predicate<Integer> hopsPredicate,
+//                                                         final Integer hopsLimit){
+//        final MeasureNoOfTracesWithHopsLimit trace = new MeasureNoOfTracesWithHopsLimit(nodes.get(endingNodeName));
+//        trace.goToTheNextOne(nodes.get(startingNodeName), hopsPredicate, hopsLimit);
+//        return trace.getResult();
+//    }
+
     public int getNumberOfRoutesWithSpecificHopsCriteria(final String startingNodeName,
                                                          final String endingNodeName,
                                                          final Predicate<Integer> hopsPredicate,
                                                          final Integer hopsLimit){
-        final Trace trace = new Trace(nodes.get(endingNodeName));
-        trace.goToTheNextOne(nodes.get(startingNodeName), hopsPredicate, hopsLimit);
-        return trace.getResult();
+
+        return MeasureNoOfTracesWithHopsLimit.calc(
+                nodes.get(startingNodeName),
+                nodes.get(endingNodeName),
+                hopsPredicate,
+                hopsLimit
+        );
     }
 
     public int getLengthOfTheShortestTrace(final String startingNodeName,
                                            final String endingNodeName){
-        final Trace trace = new Trace(nodes.get(endingNodeName));
+        final MeasureLatencyOnShortestTrace trace = new MeasureLatencyOnShortestTrace(nodes.get(endingNodeName));
         trace.findShortestTrace(nodes.get(startingNodeName), nodes.size());
         return trace.getMinLatency();
     }
@@ -48,7 +61,7 @@ public class Graph {
     public int getNumberOfRoutes(final String startingNodeName,
                                  final String endingNodeName,
                                  final Predicate<Integer> latencyPredicate) {
-        final Trace trace = new Trace(nodes.get(endingNodeName));
+        final MeasureNumberOfTraces trace = new MeasureNumberOfTraces(nodes.get(endingNodeName));
         trace.getNumberOfDifferentTracesWithAnAvarageLatency(nodes.get(startingNodeName), latencyPredicate, nodes.size()*2);
         return trace.getNumberOfRoutes();
     }
