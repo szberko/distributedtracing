@@ -49,4 +49,13 @@ class GraphTest {
         );
     }
 
+    @Test
+    void givenGraph_whenGetOverallAvgLatency_AED_thenReturnAvgLatency(){
+        assertThat(13, equalTo(graph.calculatedAvgLatency(
+                new Node("A"),
+                new Node("E"),
+                new Node("D")))
+        );
+    }
+
 }

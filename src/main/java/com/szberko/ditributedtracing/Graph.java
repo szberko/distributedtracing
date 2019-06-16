@@ -12,20 +12,15 @@ public class Graph {
         this.edges = edges;
     }
 
+    //TODO Improve me
+    //TODO Add exception handling when there no such trace
+    //TODO Add exception handling when there is no sufficient input parameters
     public int calculatedAvgLatency(Node... trace){
-        int overalLatency = 0;
+        int overallLatency = 0;
         for (int i = 1; i < trace.length; i++){
-            overalLatency += edges.get(trace[i-1].getName() + trace[i].getName()).getLatency();
+            overallLatency += edges.get(trace[i-1].getName() + trace[i].getName()).getLatency();
         }
-        return overalLatency;
-    }
-
-    public Map<String, Node> getNodes() {
-        return nodes;
-    }
-
-    public Map<String, Edge> getEdges() {
-        return edges;
+        return overallLatency;
     }
 
     @Override
