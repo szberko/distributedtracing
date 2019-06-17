@@ -10,8 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class GraphTest {
 
-//    private static final Graph graph = Provider.aGraph();
-
     /**
      * 1
      */

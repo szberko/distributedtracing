@@ -18,7 +18,7 @@ public class FileUtility {
         final Map<String, Edge> edges = parseEdges(connections, nodes);
 
         final Map<String, Node> fullNodes = combine(nodes, edges);
-        return new Graph(nodes);
+        return new Graph(fullNodes);
     }
 
     private static Map<String, Node> combine(Map<String, Node> nodes, Map<String, Edge> edges){
