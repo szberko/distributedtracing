@@ -1,9 +1,6 @@
 package com.szberko.ditributedtracing;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class Node {
 
@@ -37,6 +34,10 @@ public class Node {
 
     public Set<Edge> getOutgoingEdges() {
         return outgoingEdges;
+    }
+
+    public Optional<Edge> getOutGoingEdgeWithSpecificDestination(Node destination){
+        return outgoingEdges.stream().filter(outgoingEdge -> outgoingEdge.getEndingNode().equals(destination)).findFirst();
     }
 
     public Set<Edge> getIncomingEdges() {

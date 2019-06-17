@@ -15,6 +15,6 @@ class FileUtilityTest {
     void test(){
         Graph something =  FileUtility.parseGraph(inputData);
 
-        assertThat(something, equalTo(newGraph));
+        assertThat(something, equalTo(graph));
     }
 }

@@ -1,15 +1,20 @@
 package com.szberko.ditributedtracing;
 
+import com.szberko.ditributedtracing.exception.NoSuchTrace;
 import org.junit.jupiter.api.Test;
 
 import static com.szberko.ditributedtracing.Provider.graph;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class GraphTest {
 
 //    private static final Graph graph = Provider.aGraph();
 
+    /**
+     * 1
+     */
     @Test
     void givenGraph_whenGetOverallAvgLatency_ABC_thenReturnAvgLatency(){
         assertThat(graph.calculatedAvgLatency(
@@ -18,6 +23,9 @@ class GraphTest {
                 new Node("C")), equalTo(9));
     }
 
+    /**
+     * 2
+     */
     @Test
     void givenGraph_whenGetOverallAvgLatency_AD_thenReturnAvgLatency(){
         assertThat(graph.calculatedAvgLatency(
@@ -25,6 +33,9 @@ class GraphTest {
                 new Node("D")), equalTo(5));
     }
 
+    /**
+     * 3
+     */
     @Test
     void givenGraph_whenGetOverallAvgLatency_ADC_thenReturnAvgLatency(){
         assertThat(graph.calculatedAvgLatency(
@@ -33,6 +44,9 @@ class GraphTest {
                 new Node("C")), equalTo(13));
     }
 
+    /**
+     * 4
+     */
     @Test
     void givenGraph_whenGetOverallAvgLatency_AEBCD_thenReturnAvgLatency(){
         assertThat(graph.calculatedAvgLatency(
@@ -43,12 +57,15 @@ class GraphTest {
                 new Node("D")), equalTo(22));
     }
 
+    /**
+     * 5
+     */
     @Test
     void givenGraph_whenGetOverallAvgLatency_AED_thenReturnAvgLatency(){
-        assertThat(graph.calculatedAvgLatency(
+        assertThrows(NoSuchTrace.class, () -> graph.calculatedAvgLatency(
                 new Node("A"),
                 new Node("E"),
-                new Node("D")), equalTo(13));
+                new Node("D")));
     }
 
     @Test

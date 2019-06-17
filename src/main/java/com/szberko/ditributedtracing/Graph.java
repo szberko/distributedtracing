@@ -1,34 +1,26 @@
 package com.szberko.ditributedtracing;
 
+import com.szberko.ditributedtracing.exception.NoSuchTrace;
+
 import java.util.*;
 import java.util.function.Predicate;
 
 public class Graph {
 
     private final Map<String, Node> nodes;
-    private Map<String, Edge> edges;
-
-    public Graph(Map<String, Node> nodes, Map<String, Edge> edges) {
-        this.edges = edges;
-        this.nodes = nodes;
-
-        for(Map.Entry<String, Edge> edge : this.edges.entrySet()) {
-            nodes.get(edge.getValue().getStartingNode().getName()).addOutGoingEdge(edge.getValue());
-            nodes.get(edge.getValue().getEndingNode().getName()).addInComingEdge(edge.getValue());
-        }
-    }
 
     public Graph(Map<String, Node> nodes) {
         this.nodes = nodes;
     }
 
     //TODO Improve me
-    //TODO Add exception handling when there no such trace
     //TODO Add exception handling when there is no sufficient input parameters
     public int calculatedAvgLatency(Node... trace){
         int overallLatency = 0;
         for (int i = 1; i < trace.length; i++){
-            overallLatency += edges.get(trace[i-1].getName() + trace[i].getName()).getLatency();
+            overallLatency += nodes.get(trace[i-1].getName()).getOutGoingEdgeWithSpecificDestination(trace[i])
+                    .orElseThrow(() -> new NoSuchTrace("No such trace"))
+                    .getLatency();
         }
         return overallLatency;
     }
@@ -63,27 +55,5 @@ public class Graph {
                 latencyPredicate,
                 nodes.size()*2
         );
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Graph graph = (Graph) o;
-        return Objects.equals(nodes, graph.nodes) &&
-                Objects.equals(edges, graph.edges);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(nodes, edges);
-    }
-
-    @Override
-    public String toString() {
-        return "Graph{" +
-                "nodes=" + nodes +
-                ", edges=" + edges +
-                '}';
     }
 }

@@ -32,24 +32,24 @@ public class Provider {
     public static final Node newD = new Node("D", Set.of(DC, DE), Set.of(CD, AD));
     public static final Node newE = new Node("E", Set.of(EB), Set.of(DE, CE, AE));
 
-    public static final Graph graph = new Graph(
-            Map.of("A", A,
-                    "B", B,
-                    "C", C,
-                    "D", D,
-                    "E", E),
-            Map.of("AB", AB,
-                    "BC", BC,
-                    "CD", CD,
-                    "DC", DC,
-                    "DE", DE,
-                    "AD", AD,
-                    "CE", CE,
-                    "EB", EB,
-                    "AE", AE)
-    );
+//    public static final Graph graph = new Graph(
+//            Map.of("A", A,
+//                    "B", B,
+//                    "C", C,
+//                    "D", D,
+//                    "E", E),
+//            Map.of("AB", AB,
+//                    "BC", BC,
+//                    "CD", CD,
+//                    "DC", DC,
+//                    "DE", DE,
+//                    "AD", AD,
+//                    "CE", CE,
+//                    "EB", EB,
+//                    "AE", AE)
+//    );
 
-    public static final Graph newGraph = new Graph(
+    public static final Graph graph = new Graph(
             Map.of("A", newA,
                     "B", newB,
                     "C", newC,
