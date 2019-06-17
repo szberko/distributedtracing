@@ -14,8 +14,6 @@ public class Provider {
     public static final Node D = new Node("D");
     public static final Node E = new Node("E");
 
-
-
     public static final Edge AB = new Edge("AB", 5, A, B);
     public static final Edge BC = new Edge("BC", 4, B, C);
     public static final Edge CD = new Edge("CD", 8, C, D);
@@ -26,34 +24,38 @@ public class Provider {
     public static final Edge EB = new Edge("EB", 3, E, B);
     public static final Edge AE = new Edge("AE", 7, A, E);
 
-    public static final Node newA = new Node("A", Set.of(AB, AD, AE), Collections.emptySet());
-    public static final Node newB = new Node("B", Set.of(BC), Set.of(AB, EB));
-    public static final Node newC = new Node("C", Set.of(CD, CE), Set.of(BC, DC));
-    public static final Node newD = new Node("D", Set.of(DC, DE), Set.of(CD, AD));
-    public static final Node newE = new Node("E", Set.of(EB), Set.of(DE, CE, AE));
+    static {
+        A.addOutGoingEdge(AB);
+        A.addOutGoingEdge(AD);
+        A.addOutGoingEdge(AE);
 
-//    public static final Graph graph = new Graph(
-//            Map.of("A", A,
-//                    "B", B,
-//                    "C", C,
-//                    "D", D,
-//                    "E", E),
-//            Map.of("AB", AB,
-//                    "BC", BC,
-//                    "CD", CD,
-//                    "DC", DC,
-//                    "DE", DE,
-//                    "AD", AD,
-//                    "CE", CE,
-//                    "EB", EB,
-//                    "AE", AE)
-//    );
+        B.addOutGoingEdge(BC);
+        B.addInComingEdge(AB);
+        B.addInComingEdge(EB);
+
+        C.addOutGoingEdge(CD);
+        C.addOutGoingEdge(CE);
+        C.addInComingEdge(BC);
+        C.addInComingEdge(DC);
+
+        D.addOutGoingEdge(DC);
+        D.addOutGoingEdge(DE);
+        D.addInComingEdge(CD);
+        D.addInComingEdge(AD);
+
+        E.addOutGoingEdge(EB);
+        E.addInComingEdge(DE);
+        E.addInComingEdge(CE);
+        E.addInComingEdge(AE);
+
+
+    }
 
     public static final Graph graph = new Graph(
-            Map.of("A", newA,
-                    "B", newB,
-                    "C", newC,
-                    "D", newD,
-                    "E", newE)
+            Map.of("A", A,
+                    "B", B,
+                    "C", C,
+                    "D", D,
+                    "E", E)
     );
 }

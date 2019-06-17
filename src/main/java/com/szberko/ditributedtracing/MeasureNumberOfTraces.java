@@ -55,6 +55,7 @@ public class MeasureNumberOfTraces {
         for(Edge edge : currentNode.getOutgoingEdges()){
             this.hops++;
             currentLatency += edge.getLatency();
+            currentNode = edge.getEndingNode();
             getNumberOfDifferentTracesWithAnAverageLatency();
             currentLatency -= edge.getLatency();
         }

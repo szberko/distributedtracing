@@ -68,6 +68,9 @@ class GraphTest {
                 new Node("D")));
     }
 
+    /**
+     * 6
+     */
     @Test
     void givenGraph_whenCtoCWithMax3Hops_thenReturn2AsRouteCount(){
         assertThat(graph.getNumberOfRoutesWithSpecificHopsCriteria(
@@ -77,6 +80,9 @@ class GraphTest {
                 3), equalTo(2));
     }
 
+    /**
+     * 7
+     */
     @Test
     void givenGraph_whenAtoCWithExactly4Hops_thenReturn3AsRouteCount(){
         assertThat(graph.getNumberOfRoutesWithSpecificHopsCriteria(
@@ -86,16 +92,25 @@ class GraphTest {
                 4), equalTo(3));
     }
 
+    /**
+     * 8
+     */
     @Test
     void givenGraph_whenAtoCFindMinLatency_thenReturn9(){
         assertThat(graph.getLengthOfTheShortestTrace("A", "C"), equalTo(9));
     }
 
+    /**
+     * 9
+     */
     @Test
     void givenGraph_whenBtoBFindMinLatency_thenReturn9(){
         assertThat(graph.getLengthOfTheShortestTrace("B", "B"), equalTo(9));
     }
 
+    /**
+     * 10
+     */
     @Test
     void givenGraph_whenCtoCFindAllDifferentTracesWithin30Latency_thenReturn7Routes(){
         assertThat(graph.getNumberOfRoutes(

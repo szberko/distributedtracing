@@ -1,5 +1,7 @@
 package com.szberko.ditributedtracing;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class MeasureLatencyOnShortestTrace {
         this.currentNode = currentNode;
         this.currentLatency = 0;
         this.destinationNode = destinationNode;
-        this.latencies = Collections.emptyList();
+        this.latencies = new ArrayList<>();
         this.hopsLimit = hopsLimit;
     }
 
