@@ -1,24 +1,42 @@
 package com.szberko.ditributedtracing;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Predicate;
 
+/**
+ * 10
+ */
 public class MeasureNumberOfTraces {
-    private int numberOfRoutes;
     private int hops;
-    private int result;
+    private int numberOfRoutes;
+    private int currentLatency;
+    private Node currentNode;
     private final Node destinationNode;
+    private final Predicate<Integer> latencyPredicate;
+    private final Integer hopsLimit;
 
-    List<Integer> latencies = new ArrayList<>();
-    int currentLatency = 0;
-
-    public MeasureNumberOfTraces(final Node destinationNode) {
+    private MeasureNumberOfTraces(final Node currentNode,
+                                 final Node destinationNode,
+                                 final Predicate<Integer> latencyPredicate,
+                                 final Integer hopsLimit) {
         this.hops = 0;
+        this.numberOfRoutes = 0;
+        this.currentNode = currentNode;
         this.destinationNode = destinationNode;
+        this.currentLatency = 0;
+        this.latencyPredicate = latencyPredicate;
+        this.hopsLimit = hopsLimit;
     }
 
-    public void getNumberOfDifferentTracesWithAnAvarageLatency(final Node currentNode, final Predicate<Integer> latencyPredicate, final Integer hopsLimit){
+    public static Integer calc(final Node currentNode,
+                               final Node destinationNode,
+                               final Predicate<Integer> latencyPredicate,
+                               final Integer hopsLimit){
+        final MeasureNumberOfTraces measureNumberOfTraces = new MeasureNumberOfTraces(currentNode, destinationNode, latencyPredicate, hopsLimit);
+        measureNumberOfTraces.getNumberOfDifferentTracesWithAnAverageLatency();
+        return measureNumberOfTraces.getNumberOfRoutes();
+    }
+
+    private void getNumberOfDifferentTracesWithAnAverageLatency(){
         if(currentNode.equals(destinationNode) && latencyPredicate.test(currentLatency) && hops != 0) {
 
             numberOfRoutes++;
@@ -37,13 +55,13 @@ public class MeasureNumberOfTraces {
         for(Edge edge : currentNode.getOutgoingEdges()){
             this.hops++;
             currentLatency += edge.getLatency();
-            getNumberOfDifferentTracesWithAnAvarageLatency(edge.getEndingNode(), latencyPredicate, hopsLimit);
+            getNumberOfDifferentTracesWithAnAverageLatency();
             currentLatency -= edge.getLatency();
         }
         hops--;
     }
 
-    public int getNumberOfRoutes(){
+    private int getNumberOfRoutes(){
         return numberOfRoutes;
     }
 }

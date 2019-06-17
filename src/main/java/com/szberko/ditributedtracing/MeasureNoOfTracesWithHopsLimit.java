@@ -2,6 +2,10 @@ package com.szberko.ditributedtracing;
 
 import java.util.function.Predicate;
 
+/**
+ * 6
+ * 7
+ */
 public class MeasureNoOfTracesWithHopsLimit implements Measurement{
 
     private int hops;
@@ -27,12 +31,12 @@ public class MeasureNoOfTracesWithHopsLimit implements Measurement{
                             final Node destinationNode,
                             final Predicate<Integer> hopsPredicate,
                             final Integer hopsLimit){
-        MeasureNoOfTracesWithHopsLimit something = new MeasureNoOfTracesWithHopsLimit(currentNode, destinationNode, hopsPredicate, hopsLimit);
-        something.goToTheNextOne();
-        return something.getResult();
+        MeasureNoOfTracesWithHopsLimit measureNoOfTracesWithHopsLimit = new MeasureNoOfTracesWithHopsLimit(currentNode, destinationNode, hopsPredicate, hopsLimit);
+        measureNoOfTracesWithHopsLimit.walkThrough();
+        return measureNoOfTracesWithHopsLimit.getResult();
     }
 
-    private void goToTheNextOne(){
+    private void walkThrough(){
         if(currentNode.equals(destinationNode) && hopsPredicate.test(hops) && hops != 0){
             result++;
             hops--;
@@ -47,7 +51,7 @@ public class MeasureNoOfTracesWithHopsLimit implements Measurement{
         for(Edge edge : currentNode.getOutgoingEdges()){
             this.hops++;
             this.currentNode = edge.getEndingNode();
-            goToTheNextOne();
+            walkThrough();
         }
         hops--;
     }

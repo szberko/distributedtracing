@@ -1,24 +1,42 @@
 package com.szberko.ditributedtracing;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+/**
+ * 8
+ * 9
+ */
 public class MeasureLatencyOnShortestTrace {
 
-    List<Integer> latencies = new ArrayList<>();
-    int currentLatency = 0;
-
     private int hops;
-    private int result;
+    private Node currentNode;
     private final Node destinationNode;
+    private List<Integer> latencies;
+    private int currentLatency;
+    private final Integer hopsLimit;
 
-    public MeasureLatencyOnShortestTrace(final Node destinationNode) {
+    private MeasureLatencyOnShortestTrace(final Node currentNode,
+                                         final Node destinationNode,
+                                         final Integer hopsLimit) {
         this.hops = 0;
+        this.currentNode = currentNode;
+        this.currentLatency = 0;
         this.destinationNode = destinationNode;
+        this.latencies = Collections.emptyList();
+        this.hopsLimit = hopsLimit;
+    }
+
+    public static Integer calc(final Node currentNode,
+                               final Node destinationNode,
+                               final Integer hopsLimit){
+        MeasureLatencyOnShortestTrace measureLatencyOnShortestTrace = new MeasureLatencyOnShortestTrace(currentNode, destinationNode, hopsLimit);
+        measureLatencyOnShortestTrace.findShortestTrace();
+        return measureLatencyOnShortestTrace.getMinLatency();
     }
 
 
-    public void findShortestTrace(final Node currentNode, final Integer hopsLimit){
+    private void findShortestTrace(){
         if(currentNode.equals(destinationNode) && hops != 0){
             latencies.add(currentLatency);
             hops--;
@@ -33,13 +51,14 @@ public class MeasureLatencyOnShortestTrace {
         for(Edge edge : currentNode.getOutgoingEdges()){
             this.hops++;
             currentLatency += edge.getLatency();
-            findShortestTrace(edge.getEndingNode(), hopsLimit);
+            currentNode = edge.getEndingNode();
+            findShortestTrace();
             currentLatency -= edge.getLatency();
         }
         hops--;
     }
 
-    public int getMinLatency(){
+    private int getMinLatency(){
         return latencies.stream().min(Integer::compare).get();
     }
 }
