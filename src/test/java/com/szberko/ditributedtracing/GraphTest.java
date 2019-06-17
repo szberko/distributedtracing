@@ -116,4 +116,10 @@ class GraphTest {
                 "C",
                 latency -> latency < 30), equalTo(7));
     }
+
+    @Test
+    void givenGraph_whenGetOverallAvgLatency_A_thenThrowIllegalArgumentException(){
+        assertThrows(IllegalArgumentException.class, () -> graph.calculatedAvgLatency(
+                new Node("A")));
+    }
 }

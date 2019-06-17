@@ -4,6 +4,8 @@ import com.szberko.ditributedtracing.exception.NoSuchTrace;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Graph {
 
@@ -13,9 +15,20 @@ public class Graph {
         this.nodes = nodes;
     }
 
-    //TODO Improve me
-    //TODO Add exception handling when there is no sufficient input parameters
     public int calculatedAvgLatency(Node... trace){
+        if(trace.length <= 1){
+            throw new IllegalArgumentException("There is no enough arguments");
+        }
+
+//        return IntStream.range(1, trace.length)
+//                .mapToObj(i -> nodes.get(trace[i-1].getName()).getOutGoingEdgeWithSpecificDestination(trace[i]))
+//                .filter(Optional::isPresent)
+//                .map(Optional::get)
+//                .map(Edge::getLatency)
+//                .mapToInt(Integer::intValue)
+//                .sum();
+
+
         int overallLatency = 0;
         for (int i = 1; i < trace.length; i++){
             overallLatency += nodes.get(trace[i-1].getName()).getOutGoingEdgeWithSpecificDestination(trace[i])
