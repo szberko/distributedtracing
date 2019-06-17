@@ -11,13 +11,22 @@ import java.util.stream.Stream;
 
 public class FileUtility {
 
-    public static Graph parseGraph(Stream<String> connections){
-        final List<String> edges = separateEdges(connections);
+    public static Graph parseGraph(String input){
+        final List<String> connections = separateEdges(input);
 
-        final Map<String, Node> nodes = parseNodes(edges);
-        final Map<String, Edge> finalEdges = parseEdges(edges, nodes);
+        final Map<String, Node> nodes = parseNodes(connections);
+        final Map<String, Edge> edges = parseEdges(connections, nodes);
 
-        return new Graph(nodes, finalEdges);
+        final Map<String, Node> fullNodes = combine(nodes, edges);
+        return new Graph(fullNodes);
+    }
+
+    private static Map<String, Node> combine(Map<String, Node> nodes, Map<String, Edge> edges){
+        edges.forEach((edgeName, edge)->
+                nodes.get(edge.getStartingNode().getName()).addOutGoingEdge(edge));
+        edges.forEach((edgeName, edge)->
+                nodes.get(edge.getEndingNode().getName()).addInComingEdge(edge));
+        return nodes;
     }
 
     private static Map<String, Edge> parseEdges(List<String> connections, Map<String, Node> nodes){
@@ -38,8 +47,8 @@ public class FileUtility {
                 .collect(Collectors.toMap(Node::getName, node -> node, (node1, node2) -> node1));
     }
 
-    protected static List<String> separateEdges(Stream<String> input){
-        return input.map(string -> string.split(","))
+    protected static List<String> separateEdges(String input){
+        return Stream.of(input).map(string -> string.split(","))
                 .flatMap(Arrays::stream)
                 .map(String::trim)
                 .collect(Collectors.toList());

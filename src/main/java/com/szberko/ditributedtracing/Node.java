@@ -11,10 +11,16 @@ public class Node {
     private Set<Edge> outgoingEdges;
     private Set<Edge> incomingEdges;
 
-        public Node(String name) {
+    public Node(String name) {
         this.name = name;
         this.outgoingEdges = new HashSet<>();
         this.incomingEdges = new HashSet<>();
+    }
+
+    public Node(String name, Set<Edge> outgoingEdges, Set<Edge> incomingEdges) {
+        this.name = name;
+        this.outgoingEdges = outgoingEdges;
+        this.incomingEdges = incomingEdges;
     }
 
     public String getName() {
@@ -54,6 +60,8 @@ public class Node {
     public String toString() {
         return "Node{" +
                 "name='" + name + '\'' +
+                ", outgoingEdges=" + outgoingEdges +
+                ", incomingEdges=" + incomingEdges +
                 '}';
     }
 }

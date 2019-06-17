@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 public class Graph {
 
     private final Map<String, Node> nodes;
-    private final Map<String, Edge> edges;
+    private Map<String, Edge> edges;
 
     public Graph(Map<String, Node> nodes, Map<String, Edge> edges) {
         this.edges = edges;
@@ -16,6 +16,10 @@ public class Graph {
             nodes.get(edge.getValue().getStartingNode().getName()).addOutGoingEdge(edge.getValue());
             nodes.get(edge.getValue().getEndingNode().getName()).addInComingEdge(edge.getValue());
         }
+    }
+
+    public Graph(Map<String, Node> nodes) {
+        this.nodes = nodes;
     }
 
     //TODO Improve me

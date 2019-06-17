@@ -4,8 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.stream.Stream;
 
-import static com.szberko.ditributedtracing.Provider.inputData;
-import static com.szberko.ditributedtracing.Provider.graph;
+import static com.szberko.ditributedtracing.Provider.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -14,8 +13,8 @@ class FileUtilityTest {
 
     @Test
     void test(){
-        Graph something =  FileUtility.parseGraph(Stream.of(inputData));
+        Graph something =  FileUtility.parseGraph(inputData);
 
-        assertThat(something, equalTo(graph));
+        assertThat(something, equalTo(newGraph));
     }
 }
