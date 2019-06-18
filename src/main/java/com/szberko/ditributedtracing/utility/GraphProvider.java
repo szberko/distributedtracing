@@ -1,5 +1,6 @@
 package com.szberko.ditributedtracing.utility;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.szberko.ditributedtracing.exception.GraphCannotCreatedException;
 import com.szberko.ditributedtracing.model.Edge;
 import com.szberko.ditributedtracing.model.Graph;
@@ -24,13 +25,6 @@ public class GraphProvider {
                 .orElseThrow(() -> new GraphCannotCreatedException("Cannot create graph from file"));
     }
 
-    public static Graph parseGraph(final String input){
-        final Stream<String> connections = separateEdges(input);
-
-        final Map<String, Node> nodes = parse(connections);
-        return new Graph(nodes);
-    }
-
     private static Map<String, Node> parse(final Stream<String> connections){
         Map<String, Node> nodes = new HashMap<>();
         connections.forEach(connection -> {
@@ -47,13 +41,15 @@ public class GraphProvider {
         return nodes;
     }
 
-    private static Stream<String> separateEdges(final String input){
+    @VisibleForTesting
+    static Stream<String> separateEdges(final String input){
         return Stream.of(input).map(string -> string.split(","))
                 .flatMap(Arrays::stream)
                 .map(String::trim);
     }
 
-    private static Stream<String> readFromFile(final String fileName) {
+    @VisibleForTesting
+    static Stream<String> readFromFile(final String fileName) {
         InputStream stream = GraphProvider.class.getClassLoader().getResourceAsStream(fileName);
         return new BufferedReader(new InputStreamReader(Objects.requireNonNull(stream))).lines();
     }

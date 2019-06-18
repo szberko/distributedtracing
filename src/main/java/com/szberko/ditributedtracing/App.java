@@ -32,8 +32,6 @@ public class App {
                     measure.getLengthOfTheShortestTrace("B", "B"));
             logger.info("10 : {}",
                     measure.getNumberOfRoutes("C", "C", latencyLimit -> latencyLimit < 30));
-        } catch (IOException e) {
-            logger.error("File cannot be read by the program or corrupted.");
         } catch (GraphCannotCreatedException e) {
             logger.error("There is no valid input in the provided file");
         }

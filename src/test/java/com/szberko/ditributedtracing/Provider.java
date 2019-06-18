@@ -6,6 +6,8 @@ import com.szberko.ditributedtracing.model.Graph;
 import com.szberko.ditributedtracing.model.Node;
 import com.szberko.ditributedtracing.utility.GraphProvider;
 
+import java.util.Map;
+
 public class Provider {
 
     public static final String inputData = "AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7";
@@ -53,7 +55,12 @@ public class Provider {
 
     }
 
-    public static final Graph graph = GraphProvider.parseGraph(inputData);
+    public static final Graph graph = new Graph(Map.of(
+            A.getName(), A,
+            B.getName(), B,
+            C.getName(), C,
+            D.getName(), D,
+            E.getName(), E));
     public static final Measure MEASURE = new Measure(graph);
 
 }
