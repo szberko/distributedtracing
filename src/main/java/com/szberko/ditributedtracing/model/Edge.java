@@ -1,4 +1,4 @@
-package com.szberko.ditributedtracing;
+package com.szberko.ditributedtracing.model;
 
 import java.util.Objects;
 

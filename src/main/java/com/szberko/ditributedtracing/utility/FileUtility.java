@@ -1,4 +1,8 @@
-package com.szberko.ditributedtracing;
+package com.szberko.ditributedtracing.utility;
+
+import com.szberko.ditributedtracing.model.Node;
+import com.szberko.ditributedtracing.model.Edge;
+import com.szberko.ditributedtracing.model.Graph;
 
 import java.io.IOException;
 import java.nio.file.Files;

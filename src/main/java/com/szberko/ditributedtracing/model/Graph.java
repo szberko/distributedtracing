@@ -1,11 +1,12 @@
-package com.szberko.ditributedtracing;
+package com.szberko.ditributedtracing.model;
 
+import com.szberko.ditributedtracing.measure.MeasureLatencyOnShortestTrace;
+import com.szberko.ditributedtracing.measure.MeasureNoOfTracesWithHopsLimit;
+import com.szberko.ditributedtracing.measure.MeasureNumberOfTraces;
 import com.szberko.ditributedtracing.exception.NoSuchTrace;
 
 import java.util.*;
 import java.util.function.Predicate;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class Graph {
 

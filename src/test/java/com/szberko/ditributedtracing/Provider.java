@@ -1,6 +1,9 @@
 package com.szberko.ditributedtracing;
 
-import java.util.Map;
+import com.szberko.ditributedtracing.model.Edge;
+import com.szberko.ditributedtracing.model.Graph;
+import com.szberko.ditributedtracing.model.Node;
+import com.szberko.ditributedtracing.utility.FileUtility;
 
 public class Provider {
 

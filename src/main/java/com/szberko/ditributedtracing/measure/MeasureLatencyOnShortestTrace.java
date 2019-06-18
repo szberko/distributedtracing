@@ -1,8 +1,9 @@
-package com.szberko.ditributedtracing;
+package com.szberko.ditributedtracing.measure;
+
+import com.szberko.ditributedtracing.model.Edge;
+import com.szberko.ditributedtracing.model.Node;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
