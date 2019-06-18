@@ -5,9 +5,10 @@ import com.szberko.ditributedtracing.model.Edge;
 import com.szberko.ditributedtracing.model.Graph;
 import com.szberko.ditributedtracing.model.Node;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;

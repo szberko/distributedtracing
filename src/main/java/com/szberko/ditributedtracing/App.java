@@ -49,16 +49,14 @@ public class App {
                     measure.getNumberOfRoutesWithSpecificHopsCriteria(
                             "C",
                             "C",
-                            hopsLimit -> hopsLimit <= 3,
-                            10
+                            hopsLimit -> hopsLimit <= 3
                     )
             );
             System.out.println(
                     measure.getNumberOfRoutesWithSpecificHopsCriteria(
                             "A",
                             "C",
-                            hopsLimit -> hopsLimit == 4,
-                            10
+                            hopsLimit -> hopsLimit == 4
                     )
             );
             System.out.println(

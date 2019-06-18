@@ -21,13 +21,12 @@ public class Measure {
 
     public int getNumberOfRoutesWithSpecificHopsCriteria(final String startingNodeName,
                                                          final String endingNodeName,
-                                                         final Predicate<Integer> hopsPredicate,
-                                                         final Integer hopsLimit){
+                                                         final Predicate<Integer> hopsPredicate){
         return MeasureNoOfTracesWithHopsLimit.calc(
                 graph.getNodes().get(startingNodeName),
                 graph.getNodes().get(endingNodeName),
                 hopsPredicate,
-                hopsLimit
+                graph.getHopsLimit()
         );
     }
 
@@ -36,7 +35,7 @@ public class Measure {
         return MeasureLatencyOnShortestTrace.calc(
                 graph.getNodes().get(startingNodeName),
                 graph.getNodes().get(endingNodeName),
-                graph.getNodes().size()*2
+                graph.getHopsLimit()
         );
     }
 
@@ -47,7 +46,7 @@ public class Measure {
                 graph.getNodes().get(startingNodeName),
                 graph.getNodes().get(endingNodeName),
                 latencyPredicate,
-                graph.getNodes().size()*2
+                graph.getHopsLimit()
         );
     }
 }

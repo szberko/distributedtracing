@@ -75,8 +75,7 @@ class GraphTest {
         assertThat(MEASURE.getNumberOfRoutesWithSpecificHopsCriteria(
                 "C",
                 "C",
-                hops -> hops <= 3,
-                3), equalTo(2));
+                hops -> hops <= 3), equalTo(2));
     }
 
     /**
@@ -87,8 +86,7 @@ class GraphTest {
         assertThat(MEASURE.getNumberOfRoutesWithSpecificHopsCriteria(
                 "A",
                 "C",
-                hops -> hops == 4,
-                4), equalTo(3));
+                hops -> hops == 4), equalTo(3));
     }
 
     /**

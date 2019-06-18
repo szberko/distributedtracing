@@ -1,23 +1,24 @@
 package com.szberko.ditributedtracing.model;
 
-import com.szberko.ditributedtracing.measure.MeasureLatencyOnShortestTrace;
-import com.szberko.ditributedtracing.measure.MeasureNoOfTracesWithHopsLimit;
-import com.szberko.ditributedtracing.measure.MeasureNumberOfTraces;
-import com.szberko.ditributedtracing.exception.NoSuchTraceException;
-
-import java.util.*;
-import java.util.function.Predicate;
+import java.util.Map;
+import java.util.Objects;
 
 public class Graph {
 
     private final Map<String, Node> nodes;
+    private final Integer hopsLimit;
 
     public Graph(Map<String, Node> nodes) {
         this.nodes = nodes;
+        this.hopsLimit = nodes.size() * 2;
     }
 
     public Map<String, Node> getNodes() {
         return nodes;
+    }
+
+    public Integer getHopsLimit() {
+        return hopsLimit;
     }
 
     @Override
