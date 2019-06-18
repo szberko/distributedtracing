@@ -49,8 +49,7 @@ public class Measure {
         return MeasureNoOfTracesWithLatencyLimit.calc(
                 graph.getNodes().get(startingNodeName),
                 graph.getNodes().get(endingNodeName),
-                latencyPredicate,
-                graph.getHopsLimit()
+                latencyPredicate
         );
     }
 }
