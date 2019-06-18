@@ -4,7 +4,7 @@ import com.szberko.ditributedtracing.exception.NoSuchTraceException;
 import com.szberko.ditributedtracing.model.Node;
 import org.junit.jupiter.api.Test;
 
-import static com.szberko.ditributedtracing.Provider.graph;
+import static com.szberko.ditributedtracing.Provider.MEASURE;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -16,7 +16,7 @@ class GraphTest {
      */
     @Test
     void givenGraph_whenGetOverallAvgLatency_ABC_thenReturnAvgLatency(){
-        assertThat(graph.calculatedAvgLatency(
+        assertThat(MEASURE.calculatedAvgLatency(
                 new Node("A"),
                 new Node("B"),
                 new Node("C")), equalTo(9));
@@ -27,7 +27,7 @@ class GraphTest {
      */
     @Test
     void givenGraph_whenGetOverallAvgLatency_AD_thenReturnAvgLatency(){
-        assertThat(graph.calculatedAvgLatency(
+        assertThat(MEASURE.calculatedAvgLatency(
                 new Node("A"),
                 new Node("D")), equalTo(5));
     }
@@ -37,7 +37,7 @@ class GraphTest {
      */
     @Test
     void givenGraph_whenGetOverallAvgLatency_ADC_thenReturnAvgLatency(){
-        assertThat(graph.calculatedAvgLatency(
+        assertThat(MEASURE.calculatedAvgLatency(
                 new Node("A"),
                 new Node("D"),
                 new Node("C")), equalTo(13));
@@ -48,7 +48,7 @@ class GraphTest {
      */
     @Test
     void givenGraph_whenGetOverallAvgLatency_AEBCD_thenReturnAvgLatency(){
-        assertThat(graph.calculatedAvgLatency(
+        assertThat(MEASURE.calculatedAvgLatency(
                 new Node("A"),
                 new Node("E"),
                 new Node("B"),
@@ -61,7 +61,7 @@ class GraphTest {
      */
     @Test
     void givenGraph_whenGetOverallAvgLatency_AED_thenReturnAvgLatency(){
-        assertThrows(NoSuchTraceException.class, () -> graph.calculatedAvgLatency(
+        assertThrows(NoSuchTraceException.class, () -> MEASURE.calculatedAvgLatency(
                 new Node("A"),
                 new Node("E"),
                 new Node("D")));
@@ -72,7 +72,7 @@ class GraphTest {
      */
     @Test
     void givenGraph_whenCtoCWithMax3Hops_thenReturn2AsRouteCount(){
-        assertThat(graph.getNumberOfRoutesWithSpecificHopsCriteria(
+        assertThat(MEASURE.getNumberOfRoutesWithSpecificHopsCriteria(
                 "C",
                 "C",
                 hops -> hops <= 3,
@@ -84,7 +84,7 @@ class GraphTest {
      */
     @Test
     void givenGraph_whenAtoCWithExactly4Hops_thenReturn3AsRouteCount(){
-        assertThat(graph.getNumberOfRoutesWithSpecificHopsCriteria(
+        assertThat(MEASURE.getNumberOfRoutesWithSpecificHopsCriteria(
                 "A",
                 "C",
                 hops -> hops == 4,
@@ -96,7 +96,7 @@ class GraphTest {
      */
     @Test
     void givenGraph_whenAtoCFindMinLatency_thenReturn9(){
-        assertThat(graph.getLengthOfTheShortestTrace("A", "C"), equalTo(9));
+        assertThat(MEASURE.getLengthOfTheShortestTrace("A", "C"), equalTo(9));
     }
 
     /**
@@ -104,7 +104,7 @@ class GraphTest {
      */
     @Test
     void givenGraph_whenBtoBFindMinLatency_thenReturn9(){
-        assertThat(graph.getLengthOfTheShortestTrace("B", "B"), equalTo(9));
+        assertThat(MEASURE.getLengthOfTheShortestTrace("B", "B"), equalTo(9));
     }
 
     /**
@@ -112,7 +112,7 @@ class GraphTest {
      */
     @Test
     void givenGraph_whenCtoCFindAllDifferentTracesWithin30Latency_thenReturn7Routes(){
-        assertThat(graph.getNumberOfRoutes(
+        assertThat(MEASURE.getNumberOfRoutes(
                 "C",
                 "C",
                 latency -> latency < 30), equalTo(7));
@@ -120,7 +120,7 @@ class GraphTest {
 
     @Test
     void givenGraph_whenGetOverallAvgLatency_A_thenThrowIllegalArgumentException(){
-        assertThrows(IllegalArgumentException.class, () -> graph.calculatedAvgLatency(
+        assertThrows(IllegalArgumentException.class, () -> MEASURE.calculatedAvgLatency(
                 new Node("A")));
     }
 }

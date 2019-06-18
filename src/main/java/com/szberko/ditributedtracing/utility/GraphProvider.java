@@ -13,16 +13,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
-public class FileUtility {
+public class GraphProvider {
 
-    public static Graph provideGraph(final String filePath) throws IOException, GraphCannotCreatedException {
-        return readFromFile(filePath).map(FileUtility::separateEdges)
-                .map(FileUtility::parse)
+    public static Graph provideGraph(final String fileName) throws IOException, GraphCannotCreatedException {
+        return readFromFile(fileName).map(GraphProvider::separateEdges)
+                .map(GraphProvider::parse)
                 .map(Graph::new)
                 .findAny()
                 .orElseThrow(() -> new GraphCannotCreatedException("Cannot create graph from file"));
     }
-
 
     public static Graph parseGraph(String input){
         final Stream<String> connections = separateEdges(input);
@@ -53,7 +52,7 @@ public class FileUtility {
                 .map(String::trim);
     }
 
-    private static Stream<String> readFromFile(final String filePath) throws IOException {
-        return Files.lines(Paths.get(filePath));
+    private static Stream<String> readFromFile(final String fileName) throws IOException {
+        return Files.lines(Paths.get(GraphProvider.class.getClassLoader().getResource(fileName).getFile()));
     }
 }

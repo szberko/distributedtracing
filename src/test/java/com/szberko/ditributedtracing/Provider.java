@@ -1,9 +1,10 @@
 package com.szberko.ditributedtracing;
 
+import com.szberko.ditributedtracing.measure.Measure;
 import com.szberko.ditributedtracing.model.Edge;
 import com.szberko.ditributedtracing.model.Graph;
 import com.szberko.ditributedtracing.model.Node;
-import com.szberko.ditributedtracing.utility.FileUtility;
+import com.szberko.ditributedtracing.utility.GraphProvider;
 
 public class Provider {
 
@@ -52,6 +53,7 @@ public class Provider {
 
     }
 
-    public static final Graph graph = FileUtility.parseGraph(inputData);
+    public static final Graph graph = GraphProvider.parseGraph(inputData);
+    public static final Measure MEASURE = new Measure(graph);
 
 }
