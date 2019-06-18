@@ -3,7 +3,7 @@ package com.szberko.ditributedtracing.model;
 import com.szberko.ditributedtracing.measure.MeasureLatencyOnShortestTrace;
 import com.szberko.ditributedtracing.measure.MeasureNoOfTracesWithHopsLimit;
 import com.szberko.ditributedtracing.measure.MeasureNumberOfTraces;
-import com.szberko.ditributedtracing.exception.NoSuchTrace;
+import com.szberko.ditributedtracing.exception.NoSuchTraceException;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -33,7 +33,7 @@ public class Graph {
         int overallLatency = 0;
         for (int i = 1; i < trace.length; i++){
             overallLatency += nodes.get(trace[i-1].getName()).getOutGoingEdgeWithSpecificDestination(trace[i])
-                    .orElseThrow(() -> new NoSuchTrace("No such trace"))
+                    .orElseThrow(() -> new NoSuchTraceException("No such trace"))
                     .getLatency();
         }
         return overallLatency;

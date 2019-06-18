@@ -1,6 +1,6 @@
 package com.szberko.ditributedtracing;
 
-import com.szberko.ditributedtracing.exception.NoSuchTrace;
+import com.szberko.ditributedtracing.exception.NoSuchTraceException;
 import com.szberko.ditributedtracing.model.Node;
 import org.junit.jupiter.api.Test;
 
@@ -61,7 +61,7 @@ class GraphTest {
      */
     @Test
     void givenGraph_whenGetOverallAvgLatency_AED_thenReturnAvgLatency(){
-        assertThrows(NoSuchTrace.class, () -> graph.calculatedAvgLatency(
+        assertThrows(NoSuchTraceException.class, () -> graph.calculatedAvgLatency(
                 new Node("A"),
                 new Node("E"),
                 new Node("D")));
