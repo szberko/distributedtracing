@@ -14,6 +14,10 @@ public class MeasureAvgLatency implements Measurement{
     }
 
     public static String calc(final List<Node> trace){
+        if(trace.size() <= 1){
+            throw new IllegalArgumentException("There is no enough arguments");
+        }
+
         final MeasureAvgLatency measureAvgLatency = new MeasureAvgLatency(trace);
         try {
             return String.valueOf(measureAvgLatency.calculatedAvgLatency());
@@ -22,11 +26,7 @@ public class MeasureAvgLatency implements Measurement{
         }
     }
 
-    public int calculatedAvgLatency() throws NoSuchTraceException {
-        if(trace.size() <= 1){
-            throw new IllegalArgumentException("There is no enough arguments");
-        }
-
+    private int calculatedAvgLatency() throws NoSuchTraceException {
         int overallLatency = 0;
         for (int i = 1; i < trace.size(); i++){
             overallLatency += trace.get(i-1).getOutGoingEdgeWithSpecificDestination(trace.get(i))

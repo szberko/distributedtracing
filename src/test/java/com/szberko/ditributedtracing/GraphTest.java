@@ -1,6 +1,5 @@
 package com.szberko.ditributedtracing;
 
-import com.szberko.ditributedtracing.exception.NoSuchTraceException;
 import org.junit.jupiter.api.Test;
 
 import static com.szberko.ditributedtracing.Provider.MEASURE;

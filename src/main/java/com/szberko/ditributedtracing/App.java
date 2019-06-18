@@ -11,11 +11,12 @@ import java.io.IOException;
 public class App {
 
     private final static Logger logger = LogManager.getLogger(App.class);
+    private final static String inputFileName = "test.txt";
 
     public static void main(String[] args) {
 
         try {
-            Measure measure = new Measure(GraphProvider.provideGraph("test.txt"));
+            Measure measure = new Measure(GraphProvider.provideGraph(inputFileName));
             logger.info("1 : {}", measure.calculatedAvgLatency("A", "B", "C"));
             logger.info("2 : {}", measure.calculatedAvgLatency("A", "D"));
             logger.info("3 : {}", measure.calculatedAvgLatency("A", "D", "C"));
