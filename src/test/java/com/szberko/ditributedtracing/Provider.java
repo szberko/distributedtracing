@@ -49,11 +49,6 @@ public class Provider {
 
     }
 
-    public static final Graph graph = new Graph(
-            Map.of("A", A,
-                    "B", B,
-                    "C", C,
-                    "D", D,
-                    "E", E)
-    );
+    public static final Graph graph = FileUtility.parseGraph(inputData);
+
 }

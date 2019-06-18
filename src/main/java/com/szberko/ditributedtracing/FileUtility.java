@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -14,37 +15,24 @@ public class FileUtility {
     public static Graph parseGraph(String input){
         final List<String> connections = separateEdges(input);
 
-        final Map<String, Node> nodes = parseNodes(connections);
-        final Map<String, Edge> edges = parseEdges(connections, nodes);
-
-        final Map<String, Node> fullNodes = combine(nodes, edges);
-        return new Graph(fullNodes);
+        final Map<String, Node> nodes = parse(connections);
+        return new Graph(nodes);
     }
 
-    private static Map<String, Node> combine(Map<String, Node> nodes, Map<String, Edge> edges){
-        edges.forEach((edgeName, edge)->
-                nodes.get(edge.getStartingNode().getName()).addOutGoingEdge(edge));
-        edges.forEach((edgeName, edge)->
-                nodes.get(edge.getEndingNode().getName()).addInComingEdge(edge));
+    private static Map<String, Node> parse(List<String> connections){
+        Map<String, Node> nodes = new HashMap<>();
+        connections.forEach(connection -> {
+            Node start = nodes.computeIfAbsent("" + connection.charAt(0), Node::new);
+            Node end = nodes.computeIfAbsent("" + connection.charAt(1), Node::new);
+            Edge edge = new Edge(
+                    "" + connection.charAt(0) + connection.charAt(1),
+                    Integer.parseInt("" + connection.charAt(2)),
+                    start,
+                    end);
+            start.addOutGoingEdge(edge);
+            end.addInComingEdge(edge);
+        });
         return nodes;
-    }
-
-    private static Map<String, Edge> parseEdges(List<String> connections, Map<String, Node> nodes){
-        return connections.stream()
-                .map(connection -> new Edge(
-                        "" + connection.charAt(0) + connection.charAt(1),
-                        Integer.parseInt("" + connection.charAt(2)),
-                        nodes.get("" + connection.charAt(0)),
-                        nodes.get("" + connection.charAt(1))))
-                .collect(Collectors.toMap(Edge::getName, edge -> edge));
-    }
-
-    private static Map<String, Node> parseNodes(List<String> connections){
-        return connections.stream().map(connection -> connection.replaceAll("[^A-Za-z]+", ""))
-                .map(connection -> connection.split(""))
-                .flatMap(Arrays::stream)
-                .map(Node::new)
-                .collect(Collectors.toMap(Node::getName, node -> node, (node1, node2) -> node1));
     }
 
     protected static List<String> separateEdges(String input){
