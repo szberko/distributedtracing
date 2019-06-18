@@ -15,7 +15,7 @@ class GraphTest {
      */
     @Test
     void givenGraph_whenGetOverallAvgLatency_ABC_thenReturnAvgLatency(){
-        assertThat(MEASURE.calculatedAvgLatency("A", "B", "C"), equalTo(9));
+        assertThat(MEASURE.calculatedAvgLatency("A", "B", "C"), equalTo("9"));
     }
 
     /**
@@ -23,7 +23,7 @@ class GraphTest {
      */
     @Test
     void givenGraph_whenGetOverallAvgLatency_AD_thenReturnAvgLatency(){
-        assertThat(MEASURE.calculatedAvgLatency("A", "D"), equalTo(5));
+        assertThat(MEASURE.calculatedAvgLatency("A", "D"), equalTo("5"));
     }
 
     /**
@@ -31,7 +31,7 @@ class GraphTest {
      */
     @Test
     void givenGraph_whenGetOverallAvgLatency_ADC_thenReturnAvgLatency(){
-        assertThat(MEASURE.calculatedAvgLatency("A", "D", "C"), equalTo(13));
+        assertThat(MEASURE.calculatedAvgLatency("A", "D", "C"), equalTo("13"));
     }
 
     /**
@@ -39,7 +39,7 @@ class GraphTest {
      */
     @Test
     void givenGraph_whenGetOverallAvgLatency_AEBCD_thenReturnAvgLatency(){
-        assertThat(MEASURE.calculatedAvgLatency("A", "E", "B", "C", "D"), equalTo(22));
+        assertThat(MEASURE.calculatedAvgLatency("A", "E", "B", "C", "D"), equalTo("22"));
     }
 
     /**
@@ -47,7 +47,7 @@ class GraphTest {
      */
     @Test
     void givenGraph_whenGetOverallAvgLatency_AED_thenReturnAvgLatency(){
-        assertThrows(NoSuchTraceException.class, () -> MEASURE.calculatedAvgLatency("A", "E", "D"));
+        assertThat(MEASURE.calculatedAvgLatency("A", "E", "D"), equalTo("NO SUCH TRACE"));
     }
 
     /**

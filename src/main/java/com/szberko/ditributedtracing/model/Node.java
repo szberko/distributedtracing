@@ -5,19 +5,13 @@ import java.util.*;
 public class Node {
 
     private final String name;
-    private Set<Edge> outgoingEdges;
-    private Set<Edge> incomingEdges;
+    private final Set<Edge> outgoingEdges;
+    private final Set<Edge> incomingEdges;
 
     public Node(String name) {
         this.name = name;
         this.outgoingEdges = new HashSet<>();
         this.incomingEdges = new HashSet<>();
-    }
-
-    public Node(String name, Set<Edge> outgoingEdges, Set<Edge> incomingEdges) {
-        this.name = name;
-        this.outgoingEdges = outgoingEdges;
-        this.incomingEdges = incomingEdges;
     }
 
     public String getName() {
