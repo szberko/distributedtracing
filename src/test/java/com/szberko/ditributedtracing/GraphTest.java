@@ -1,7 +1,6 @@
 package com.szberko.ditributedtracing;
 
 import com.szberko.ditributedtracing.exception.NoSuchTraceException;
-import com.szberko.ditributedtracing.model.Node;
 import org.junit.jupiter.api.Test;
 
 import static com.szberko.ditributedtracing.Provider.MEASURE;
@@ -16,10 +15,7 @@ class GraphTest {
      */
     @Test
     void givenGraph_whenGetOverallAvgLatency_ABC_thenReturnAvgLatency(){
-        assertThat(MEASURE.calculatedAvgLatency(
-                new Node("A"),
-                new Node("B"),
-                new Node("C")), equalTo(9));
+        assertThat(MEASURE.calculatedAvgLatency("A", "B", "C"), equalTo(9));
     }
 
     /**
@@ -27,9 +23,7 @@ class GraphTest {
      */
     @Test
     void givenGraph_whenGetOverallAvgLatency_AD_thenReturnAvgLatency(){
-        assertThat(MEASURE.calculatedAvgLatency(
-                new Node("A"),
-                new Node("D")), equalTo(5));
+        assertThat(MEASURE.calculatedAvgLatency("A", "D"), equalTo(5));
     }
 
     /**
@@ -37,10 +31,7 @@ class GraphTest {
      */
     @Test
     void givenGraph_whenGetOverallAvgLatency_ADC_thenReturnAvgLatency(){
-        assertThat(MEASURE.calculatedAvgLatency(
-                new Node("A"),
-                new Node("D"),
-                new Node("C")), equalTo(13));
+        assertThat(MEASURE.calculatedAvgLatency("A", "D", "C"), equalTo(13));
     }
 
     /**
@@ -48,12 +39,7 @@ class GraphTest {
      */
     @Test
     void givenGraph_whenGetOverallAvgLatency_AEBCD_thenReturnAvgLatency(){
-        assertThat(MEASURE.calculatedAvgLatency(
-                new Node("A"),
-                new Node("E"),
-                new Node("B"),
-                new Node("C"),
-                new Node("D")), equalTo(22));
+        assertThat(MEASURE.calculatedAvgLatency("A", "E", "B", "C", "D"), equalTo(22));
     }
 
     /**
@@ -61,10 +47,7 @@ class GraphTest {
      */
     @Test
     void givenGraph_whenGetOverallAvgLatency_AED_thenReturnAvgLatency(){
-        assertThrows(NoSuchTraceException.class, () -> MEASURE.calculatedAvgLatency(
-                new Node("A"),
-                new Node("E"),
-                new Node("D")));
+        assertThrows(NoSuchTraceException.class, () -> MEASURE.calculatedAvgLatency("A", "E", "D"));
     }
 
     /**
@@ -72,9 +55,7 @@ class GraphTest {
      */
     @Test
     void givenGraph_whenCtoCWithMax3Hops_thenReturn2AsRouteCount(){
-        assertThat(MEASURE.getNumberOfRoutesWithSpecificHopsCriteria(
-                "C",
-                "C",
+        assertThat(MEASURE.getNumberOfRoutesWithSpecificHopsCriteria("C", "C",
                 hops -> hops <= 3), equalTo(2));
     }
 
@@ -119,6 +100,6 @@ class GraphTest {
     @Test
     void givenGraph_whenGetOverallAvgLatency_A_thenThrowIllegalArgumentException(){
         assertThrows(IllegalArgumentException.class, () -> MEASURE.calculatedAvgLatency(
-                new Node("A")));
+                "A"));
     }
 }

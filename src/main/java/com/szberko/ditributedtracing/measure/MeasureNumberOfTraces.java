@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 /**
  * 10
  */
-public class MeasureNumberOfTraces {
+public class MeasureNumberOfTraces implements Measurement{
     private int hops;
     private int numberOfRoutes;
     private int currentLatency;
@@ -30,7 +30,7 @@ public class MeasureNumberOfTraces {
         this.hopsLimit = hopsLimit;
     }
 
-    public static Integer calc(final Node currentNode,
+    public static int calc(final Node currentNode,
                                final Node destinationNode,
                                final Predicate<Integer> latencyPredicate,
                                final Integer hopsLimit){

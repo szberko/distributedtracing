@@ -3,7 +3,10 @@ package com.szberko.ditributedtracing.measure;
 import com.szberko.ditributedtracing.model.Graph;
 import com.szberko.ditributedtracing.model.Node;
 
+import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Measure {
 
@@ -13,10 +16,11 @@ public class Measure {
         this.graph = graph;
     }
 
-    public String calculatedAvgLatency(final Node... nodes){
-        return MeasureAvgLatency.calc(
-                graph,
-                nodes);
+    public String calculatedAvgLatency(final String... nodes){
+        List<Node> listOfNodes = Stream.of(nodes)
+                .map(nodeName -> graph.getNodes().get(nodeName))
+                .collect(Collectors.toList());
+        return MeasureAvgLatency.calc(listOfNodes);
     }
 
     public int getNumberOfRoutesWithSpecificHopsCriteria(final String startingNodeName,

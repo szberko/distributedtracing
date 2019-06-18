@@ -1,22 +1,20 @@
 package com.szberko.ditributedtracing.measure;
 
 import com.szberko.ditributedtracing.exception.NoSuchTraceException;
-import com.szberko.ditributedtracing.model.Graph;
 import com.szberko.ditributedtracing.model.Node;
 
-public class MeasureAvgLatency {
+import java.util.List;
 
-    private final Graph graph;
-    private final Node[] trace;
+public class MeasureAvgLatency implements Measurement{
 
-    private MeasureAvgLatency(final Graph graph, Node... trace) {
-        this.graph = graph;
+    private final List<Node> trace;
+
+    private MeasureAvgLatency(final List<Node> trace) {
         this.trace = trace;
     }
 
-    public static String calc(final Graph graph,
-                               final Node... trace){
-        final MeasureAvgLatency measureAvgLatency = new MeasureAvgLatency(graph, trace);
+    public static String calc(final List<Node> trace){
+        final MeasureAvgLatency measureAvgLatency = new MeasureAvgLatency(trace);
         try {
             return String.valueOf(measureAvgLatency.calculatedAvgLatency());
         } catch (NoSuchTraceException e) {
@@ -25,22 +23,13 @@ public class MeasureAvgLatency {
     }
 
     public int calculatedAvgLatency() throws NoSuchTraceException {
-        if(trace.length <= 1){
+        if(trace.size() <= 1){
             throw new IllegalArgumentException("There is no enough arguments");
         }
 
-//        return IntStream.range(1, trace.length)
-//                .mapToObj(i -> graph.getNodes().get(trace[i-1].getName()).getOutGoingEdgeWithSpecificDestination(trace[i]))
-//                .filter(Optional::isPresent)
-//                .map(Optional::get)
-//                .map(Edge::getLatency)
-//                .mapToInt(Integer::intValue)
-//                .sum();
-
-
         int overallLatency = 0;
-        for (int i = 1; i < trace.length; i++){
-            overallLatency += graph.getNodes().get(trace[i-1].getName()).getOutGoingEdgeWithSpecificDestination(trace[i])
+        for (int i = 1; i < trace.size(); i++){
+            overallLatency += trace.get(i-1).getOutGoingEdgeWithSpecificDestination(trace.get(i))
                     .orElseThrow(() -> new NoSuchTraceException("No such trace"))
                     .getLatency();
         }

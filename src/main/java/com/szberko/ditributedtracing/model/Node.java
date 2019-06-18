@@ -37,7 +37,9 @@ public class Node {
     }
 
     public Optional<Edge> getOutGoingEdgeWithSpecificDestination(Node destination){
-        return outgoingEdges.stream().filter(outgoingEdge -> outgoingEdge.getEndingNode().equals(destination)).findFirst();
+        return outgoingEdges.stream()
+                .filter(outgoingEdge -> outgoingEdge.getEndingNode().equals(destination))
+                .findFirst();
     }
 
     public Set<Edge> getIncomingEdges() {

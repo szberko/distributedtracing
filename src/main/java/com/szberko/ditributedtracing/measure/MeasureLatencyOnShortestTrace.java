@@ -10,7 +10,7 @@ import java.util.List;
  * 8
  * 9
  */
-public class MeasureLatencyOnShortestTrace {
+public class MeasureLatencyOnShortestTrace implements Measurement{
 
     private int hops;
     private Node currentNode;
@@ -30,7 +30,7 @@ public class MeasureLatencyOnShortestTrace {
         this.hopsLimit = hopsLimit;
     }
 
-    public static Integer calc(final Node currentNode,
+    public static int calc(final Node currentNode,
                                final Node destinationNode,
                                final Integer hopsLimit){
         MeasureLatencyOnShortestTrace measureLatencyOnShortestTrace = new MeasureLatencyOnShortestTrace(currentNode, destinationNode, hopsLimit);
