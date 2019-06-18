@@ -4,34 +4,38 @@ import com.szberko.ditributedtracing.exception.GraphCannotCreatedException;
 import com.szberko.ditributedtracing.measure.Measure;
 import com.szberko.ditributedtracing.model.Node;
 import com.szberko.ditributedtracing.utility.GraphProvider;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.io.File;
 import java.io.IOException;
 
 public class App {
+
+    String name;
+    final static Logger logger = LogManager.getLogger(App.class);
 
     public static void main(String[] args) {
 
         try {
             Measure measure = new Measure(GraphProvider.provideGraph("test.txt"));
-            System.out.println(
+            logger.info("1 : {}",
                     measure.calculatedAvgLatency(
                             new Node("A"),
                             new Node("B"),
                             new Node("C"))
             );
-            System.out.println(
+            logger.info("2 : {}",
                     measure.calculatedAvgLatency(
                             new Node("A"),
                             new Node("D"))
             );
-            System.out.println(
+            logger.info("3 : {}",
                     measure.calculatedAvgLatency(
                             new Node("A"),
                             new Node("D"),
                             new Node("C"))
             );
-            System.out.println(
+            logger.info("4 : {}",
                     measure.calculatedAvgLatency(
                             new Node("A"),
                             new Node("E"),
@@ -39,39 +43,39 @@ public class App {
                             new Node("C"),
                             new Node("D"))
             );
-            System.out.println(
+            logger.info("5 : {}",
                     measure.calculatedAvgLatency(
                             new Node("A"),
                             new Node("E"),
                             new Node("D"))
             );
-            System.out.println(
+            logger.info("6 : {}",
                     measure.getNumberOfRoutesWithSpecificHopsCriteria(
                             "C",
                             "C",
                             hopsLimit -> hopsLimit <= 3
                     )
             );
-            System.out.println(
+            logger.info("7 : {}",
                     measure.getNumberOfRoutesWithSpecificHopsCriteria(
                             "A",
                             "C",
                             hopsLimit -> hopsLimit == 4
                     )
             );
-            System.out.println(
+            logger.info("8 : {}",
                     measure.getLengthOfTheShortestTrace(
                             "A",
                             "C"
                     )
             );
-            System.out.println(
+            logger.info("9 : {}",
                     measure.getLengthOfTheShortestTrace(
                             "B",
                             "B"
                     )
             );
-            System.out.println(
+            logger.info("10 : {}",
                     measure.getNumberOfRoutes(
                             "C",
                             "C",
@@ -79,9 +83,9 @@ public class App {
                     )
             );
         } catch (IOException e) {
-            System.out.println("File cannot be read by the program or corrupted.");
+            logger.error("File cannot be read by the program or corrupted.");
         } catch (GraphCannotCreatedException e) {
-            System.out.println("There is no valid input in the provided file");
+            logger.error("There is no valid input in the provided file");
         }
     }
 }
