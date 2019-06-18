@@ -46,7 +46,7 @@ public class Measure {
     public int getNumberOfRoutes(final String startingNodeName,
                                  final String endingNodeName,
                                  final Predicate<Integer> latencyPredicate) {
-        return MeasureNumberOfTraces.calc(
+        return MeasureNoOfTracesWithLatencyLimit.calc(
                 graph.getNodes().get(startingNodeName),
                 graph.getNodes().get(endingNodeName),
                 latencyPredicate,

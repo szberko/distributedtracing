@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 /**
  * 10
  */
-public class MeasureNumberOfTraces implements Measurement{
+public class MeasureNoOfTracesWithLatencyLimit implements Measurement{
     private int hops;
     private int numberOfRoutes;
     private int currentLatency;
@@ -17,10 +17,10 @@ public class MeasureNumberOfTraces implements Measurement{
     private final Predicate<Integer> latencyPredicate;
     private final Integer hopsLimit;
 
-    private MeasureNumberOfTraces(final Node currentNode,
-                                 final Node destinationNode,
-                                 final Predicate<Integer> latencyPredicate,
-                                 final Integer hopsLimit) {
+    private MeasureNoOfTracesWithLatencyLimit(final Node currentNode,
+                                              final Node destinationNode,
+                                              final Predicate<Integer> latencyPredicate,
+                                              final Integer hopsLimit) {
         this.hops = 0;
         this.numberOfRoutes = 0;
         this.currentNode = currentNode;
@@ -34,9 +34,9 @@ public class MeasureNumberOfTraces implements Measurement{
                                final Node destinationNode,
                                final Predicate<Integer> latencyPredicate,
                                final Integer hopsLimit){
-        final MeasureNumberOfTraces measureNumberOfTraces = new MeasureNumberOfTraces(currentNode, destinationNode, latencyPredicate, hopsLimit);
-        measureNumberOfTraces.getNumberOfDifferentTracesWithAnAverageLatency();
-        return measureNumberOfTraces.getNumberOfRoutes();
+        final MeasureNoOfTracesWithLatencyLimit measureNoOfTracesWithLatencyLimit = new MeasureNoOfTracesWithLatencyLimit(currentNode, destinationNode, latencyPredicate, hopsLimit);
+        measureNoOfTracesWithLatencyLimit.getNumberOfDifferentTracesWithAnAverageLatency();
+        return measureNoOfTracesWithLatencyLimit.getNumberOfRoutes();
     }
 
     private void getNumberOfDifferentTracesWithAnAverageLatency(){
