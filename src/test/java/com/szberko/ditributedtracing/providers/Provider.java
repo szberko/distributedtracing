@@ -1,4 +1,4 @@
-package com.szberko.ditributedtracing;
+package com.szberko.ditributedtracing.providers;
 
 import com.szberko.ditributedtracing.measure.Measure;
 import com.szberko.ditributedtracing.model.Edge;

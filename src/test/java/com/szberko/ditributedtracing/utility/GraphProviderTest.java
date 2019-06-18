@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.szberko.ditributedtracing.Provider.graph;
-import static com.szberko.ditributedtracing.Provider.inputData;
+import static com.szberko.ditributedtracing.providers.Provider.graph;
+import static com.szberko.ditributedtracing.providers.Provider.inputData;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;

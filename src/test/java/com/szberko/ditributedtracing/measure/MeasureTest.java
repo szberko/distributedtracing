@@ -1,13 +1,13 @@
-package com.szberko.ditributedtracing;
+package com.szberko.ditributedtracing.measure;
 
 import org.junit.jupiter.api.Test;
 
-import static com.szberko.ditributedtracing.Provider.MEASURE;
+import static com.szberko.ditributedtracing.providers.Provider.MEASURE;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class GraphTest {
+class MeasureTest {
 
     /**
      * 1

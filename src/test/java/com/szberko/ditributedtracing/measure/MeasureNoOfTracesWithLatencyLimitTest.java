@@ -2,7 +2,7 @@ package com.szberko.ditributedtracing.measure;
 
 import org.junit.jupiter.api.Test;
 
-import static com.szberko.ditributedtracing.Provider.C;
+import static com.szberko.ditributedtracing.providers.Provider.C;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
