@@ -1,4 +1,4 @@
-# Distribution Tracing
+# Distributed Tracing
 
 Requirements to compile and run the app:
 - Maven
