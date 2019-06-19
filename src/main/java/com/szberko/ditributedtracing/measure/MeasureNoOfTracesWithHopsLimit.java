@@ -34,7 +34,7 @@ public class MeasureNoOfTracesWithHopsLimit implements Measurement{
                             final Node destinationNode,
                             final Predicate<Integer> hopsPredicate,
                             final Integer hopsLimit){
-        MeasureNoOfTracesWithHopsLimit measureNoOfTracesWithHopsLimit = new MeasureNoOfTracesWithHopsLimit(currentNode, destinationNode, hopsPredicate, hopsLimit);
+        final MeasureNoOfTracesWithHopsLimit measureNoOfTracesWithHopsLimit = new MeasureNoOfTracesWithHopsLimit(currentNode, destinationNode, hopsPredicate, hopsLimit);
         measureNoOfTracesWithHopsLimit.walkThrough();
         return measureNoOfTracesWithHopsLimit.getResult();
     }

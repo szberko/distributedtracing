@@ -28,9 +28,9 @@ public class GraphProvider {
     private static Map<String, Node> parse(final Stream<String> connections){
         Map<String, Node> nodes = new HashMap<>();
         connections.forEach(connection -> {
-            Node start = nodes.computeIfAbsent("" + connection.charAt(0), Node::new);
-            Node end = nodes.computeIfAbsent("" + connection.charAt(1), Node::new);
-            Edge edge = new Edge(
+            final Node start = nodes.computeIfAbsent("" + connection.charAt(0), Node::new);
+            final Node end = nodes.computeIfAbsent("" + connection.charAt(1), Node::new);
+            final Edge edge = new Edge(
                     "" + connection.charAt(0) + connection.charAt(1),
                     Integer.parseInt("" + connection.charAt(2)),
                     start,
@@ -50,7 +50,7 @@ public class GraphProvider {
 
     @VisibleForTesting
     static Stream<String> readFromFile(final String fileName) {
-        InputStream stream = GraphProvider.class.getClassLoader().getResourceAsStream(fileName);
+        final InputStream stream = GraphProvider.class.getClassLoader().getResourceAsStream(fileName);
         return new BufferedReader(new InputStreamReader(Objects.requireNonNull(stream))).lines();
     }
 }

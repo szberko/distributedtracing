@@ -12,7 +12,7 @@ public class Measure {
 
     private final Graph graph;
 
-    public Measure(Graph graph) {
+    public Measure(final Graph graph) {
         this.graph = graph;
     }
 

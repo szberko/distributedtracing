@@ -1,6 +1,5 @@
 package com.szberko.ditributedtracing.measure;
 
-import com.szberko.ditributedtracing.exception.NoSuchTraceException;
 import com.szberko.ditributedtracing.model.Edge;
 import com.szberko.ditributedtracing.model.Node;
 
@@ -16,7 +15,7 @@ public class MeasureLatencyOnShortestTrace implements Measurement{
     private int hops;
     private Node currentNode;
     private final Node destinationNode;
-    private List<Integer> latencies;
+    private final List<Integer> latencies;
     private int currentLatency;
     private final Integer hopsLimit;
 
@@ -34,7 +33,7 @@ public class MeasureLatencyOnShortestTrace implements Measurement{
     public static int calc(final Node currentNode,
                                final Node destinationNode,
                                final Integer hopsLimit) {
-        MeasureLatencyOnShortestTrace measureLatencyOnShortestTrace = new MeasureLatencyOnShortestTrace(currentNode, destinationNode, hopsLimit);
+        final MeasureLatencyOnShortestTrace measureLatencyOnShortestTrace = new MeasureLatencyOnShortestTrace(currentNode, destinationNode, hopsLimit);
         measureLatencyOnShortestTrace.findShortestTrace();
         return measureLatencyOnShortestTrace.getMinLatency();
     }
