@@ -1,8 +1,8 @@
-package com.szberko.ditributedtracing;
+package com.instana.ditributedtracing;
 
-import com.szberko.ditributedtracing.exception.GraphCannotCreatedException;
-import com.szberko.ditributedtracing.measure.Measure;
-import com.szberko.ditributedtracing.utility.GraphProvider;
+import com.instana.ditributedtracing.exception.GraphCannotCreatedException;
+import com.instana.ditributedtracing.measure.Measure;
+import com.instana.ditributedtracing.utility.GraphProvider;
 
 public class App {
 

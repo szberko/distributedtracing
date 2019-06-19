@@ -1,4 +1,4 @@
-package com.szberko.ditributedtracing.exception;
+package com.instana.ditributedtracing.exception;
 
 public class GraphCannotCreatedException extends Exception {
 

@@ -1,13 +1,13 @@
-package com.szberko.ditributedtracing.utility;
+package com.instana.ditributedtracing.utility;
 
-import com.szberko.ditributedtracing.exception.GraphCannotCreatedException;
+import com.instana.ditributedtracing.exception.GraphCannotCreatedException;
 import org.junit.jupiter.api.Test;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.szberko.ditributedtracing.providers.Provider.graph;
-import static com.szberko.ditributedtracing.providers.Provider.inputData;
+import static com.instana.ditributedtracing.providers.Provider.graph;
+import static com.instana.ditributedtracing.providers.Provider.inputData;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;

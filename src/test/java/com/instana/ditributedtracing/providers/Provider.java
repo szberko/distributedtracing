@@ -1,10 +1,9 @@
-package com.szberko.ditributedtracing.providers;
+package com.instana.ditributedtracing.providers;
 
-import com.szberko.ditributedtracing.measure.Measure;
-import com.szberko.ditributedtracing.model.Edge;
-import com.szberko.ditributedtracing.model.Graph;
-import com.szberko.ditributedtracing.model.Node;
-import com.szberko.ditributedtracing.utility.GraphProvider;
+import com.instana.ditributedtracing.model.Edge;
+import com.instana.ditributedtracing.model.Graph;
+import com.instana.ditributedtracing.model.Node;
+import com.instana.ditributedtracing.measure.Measure;
 
 import java.util.Map;
 

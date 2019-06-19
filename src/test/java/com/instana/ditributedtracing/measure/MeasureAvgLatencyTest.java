@@ -1,10 +1,10 @@
-package com.szberko.ditributedtracing.measure;
+package com.instana.ditributedtracing.measure;
 
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static com.szberko.ditributedtracing.providers.Provider.*;
+import static com.instana.ditributedtracing.providers.Provider.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
