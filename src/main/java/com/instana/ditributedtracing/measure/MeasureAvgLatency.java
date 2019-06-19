@@ -1,7 +1,7 @@
-package com.szberko.ditributedtracing.measure;
+package com.instana.ditributedtracing.measure;
 
-import com.szberko.ditributedtracing.exception.NoSuchTraceException;
-import com.szberko.ditributedtracing.model.Node;
+import com.instana.ditributedtracing.exception.NoSuchTraceException;
+import com.instana.ditributedtracing.model.Node;
 
 import java.util.List;
 

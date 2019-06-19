@@ -1,8 +1,8 @@
-package com.szberko.ditributedtracing.measure;
+package com.instana.ditributedtracing.measure;
 
+import com.instana.ditributedtracing.providers.Provider;
 import org.junit.jupiter.api.Test;
 
-import static com.szberko.ditributedtracing.providers.Provider.MEASURE;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -14,7 +14,7 @@ class MeasureTest {
      */
     @Test
     void givenGraph_whenGetOverallAvgLatency_ABC_thenReturnAvgLatency(){
-        assertThat(MEASURE.calculatedAvgLatency("A", "B", "C"), equalTo("9"));
+        assertThat(Provider.MEASURE.calculatedAvgLatency("A", "B", "C"), equalTo("9"));
     }
 
     /**
@@ -22,7 +22,7 @@ class MeasureTest {
      */
     @Test
     void givenGraph_whenGetOverallAvgLatency_AD_thenReturnAvgLatency(){
-        assertThat(MEASURE.calculatedAvgLatency("A", "D"), equalTo("5"));
+        assertThat(Provider.MEASURE.calculatedAvgLatency("A", "D"), equalTo("5"));
     }
 
     /**
@@ -30,7 +30,7 @@ class MeasureTest {
      */
     @Test
     void givenGraph_whenGetOverallAvgLatency_ADC_thenReturnAvgLatency(){
-        assertThat(MEASURE.calculatedAvgLatency("A", "D", "C"), equalTo("13"));
+        assertThat(Provider.MEASURE.calculatedAvgLatency("A", "D", "C"), equalTo("13"));
     }
 
     /**
@@ -38,7 +38,7 @@ class MeasureTest {
      */
     @Test
     void givenGraph_whenGetOverallAvgLatency_AEBCD_thenReturnAvgLatency(){
-        assertThat(MEASURE.calculatedAvgLatency("A", "E", "B", "C", "D"), equalTo("22"));
+        assertThat(Provider.MEASURE.calculatedAvgLatency("A", "E", "B", "C", "D"), equalTo("22"));
     }
 
     /**
@@ -46,7 +46,7 @@ class MeasureTest {
      */
     @Test
     void givenGraph_whenGetOverallAvgLatency_AED_thenReturnAvgLatency(){
-        assertThat(MEASURE.calculatedAvgLatency("A", "E", "D"), equalTo("NO SUCH TRACE"));
+        assertThat(Provider.MEASURE.calculatedAvgLatency("A", "E", "D"), equalTo("NO SUCH TRACE"));
     }
 
     /**
@@ -54,7 +54,7 @@ class MeasureTest {
      */
     @Test
     void givenGraph_whenCtoCWithMax3Hops_thenReturn2AsRouteCount(){
-        assertThat(MEASURE.getNumberOfRoutesWithSpecificHopsCriteria("C", "C",
+        assertThat(Provider.MEASURE.getNumberOfRoutesWithSpecificHopsCriteria("C", "C",
                 hops -> hops <= 3), equalTo(2));
     }
 
@@ -63,7 +63,7 @@ class MeasureTest {
      */
     @Test
     void givenGraph_whenAtoCWithExactly4Hops_thenReturn3AsRouteCount(){
-        assertThat(MEASURE.getNumberOfRoutesWithSpecificHopsCriteria(
+        assertThat(Provider.MEASURE.getNumberOfRoutesWithSpecificHopsCriteria(
                 "A",
                 "C",
                 hops -> hops == 4), equalTo(3));
@@ -74,7 +74,7 @@ class MeasureTest {
      */
     @Test
     void givenGraph_whenAtoCFindMinLatency_thenReturn9(){
-        assertThat(MEASURE.getLengthOfTheShortestTrace("A", "C"), equalTo(9));
+        assertThat(Provider.MEASURE.getLengthOfTheShortestTrace("A", "C"), equalTo(9));
     }
 
     /**
@@ -82,7 +82,7 @@ class MeasureTest {
      */
     @Test
     void givenGraph_whenBtoBFindMinLatency_thenReturn9(){
-        assertThat(MEASURE.getLengthOfTheShortestTrace("B", "B"), equalTo(9));
+        assertThat(Provider.MEASURE.getLengthOfTheShortestTrace("B", "B"), equalTo(9));
     }
 
     /**
@@ -90,7 +90,7 @@ class MeasureTest {
      */
     @Test
     void givenGraph_whenCtoCFindAllDifferentTracesWithin30Latency_thenReturn7Routes(){
-        assertThat(MEASURE.getNumberOfRoutes(
+        assertThat(Provider.MEASURE.getNumberOfRoutes(
                 "C",
                 "C",
                 latency -> latency < 30), equalTo(7));
@@ -98,7 +98,7 @@ class MeasureTest {
 
     @Test
     void givenGraph_whenGetOverallAvgLatency_A_thenThrowIllegalArgumentException(){
-        assertThrows(IllegalArgumentException.class, () -> MEASURE.calculatedAvgLatency(
+        assertThrows(IllegalArgumentException.class, () -> Provider.MEASURE.calculatedAvgLatency(
                 "A"));
     }
 }

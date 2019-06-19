@@ -1,10 +1,10 @@
-package com.szberko.ditributedtracing.utility;
+package com.instana.ditributedtracing.utility;
 
 import com.google.common.annotations.VisibleForTesting;
-import com.szberko.ditributedtracing.exception.GraphCannotCreatedException;
-import com.szberko.ditributedtracing.model.Edge;
-import com.szberko.ditributedtracing.model.Graph;
-import com.szberko.ditributedtracing.model.Node;
+import com.instana.ditributedtracing.exception.GraphCannotCreatedException;
+import com.instana.ditributedtracing.model.Edge;
+import com.instana.ditributedtracing.model.Graph;
+import com.instana.ditributedtracing.model.Node;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

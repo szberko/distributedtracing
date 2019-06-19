@@ -1,7 +1,7 @@
-package com.szberko.ditributedtracing.measure;
+package com.instana.ditributedtracing.measure;
 
-import com.szberko.ditributedtracing.model.Edge;
-import com.szberko.ditributedtracing.model.Node;
+import com.instana.ditributedtracing.model.Node;
+import com.instana.ditributedtracing.model.Edge;
 
 import java.util.function.Predicate;
 
